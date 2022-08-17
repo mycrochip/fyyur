@@ -56,7 +56,7 @@ class Venue(db.Model):
   seeking_description = db.Column(db.String())
   date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
   date_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
-  shows = db.relationship('Show', backref='venue', lazy=True)
+  shows = db.relationship('Show', backref='venue', lazy=True, cascade="all, delete-orphan")
 
   def __repr__(self):
     return f'<Venue {self.id} {self.name}>'
@@ -79,7 +79,7 @@ class Artist(db.Model):
   seeking_description = db.Column(db.String())
   date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
   date_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
-  shows = db.relationship('Show', backref='artist', lazy=True)
+  shows = db.relationship('Show', backref='artist', lazy=True, cascade="all, delete-orphan")
 
   def __repr__(self):
     return f'<Venue {self.id} {self.name}>'
